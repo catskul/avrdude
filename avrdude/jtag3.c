@@ -1034,7 +1034,7 @@ static int jtag3_open(PROGRAMMER * pgm, char * port)
   if (strncmp(port, "usb", 3) == 0) {
 #if defined(HAVE_LIBUSB)
     serdev = &usb_serdev_frame;
-    baud = USB_DEVICE_JTAGICE3;
+/*    baud = USB_DEVICE_JTAGICE3; */ /* work around for multiple firmware versions. See usbdevs.h */
     pgm->fd.usb.max_xfer = USBDEV_MAX_XFER_3;
     pgm->fd.usb.rep = USBDEV_BULK_EP_READ_3;
     pgm->fd.usb.wep = USBDEV_BULK_EP_WRITE_3;
@@ -1046,7 +1046,8 @@ static int jtag3_open(PROGRAMMER * pgm, char * port)
   }
 
   strcpy(pgm->port, port);
-  if (serial_open(port, baud, &pgm->fd)==-1) {
+  if (   serial_open(port, USB_DEVICE_JTAGICE3_2_x, &pgm->fd)==-1 
+      && serial_open(port, USB_DEVICE_JTAGICE3_3_8, &pgm->fd)==-1 ) {
     return -1;
   }
 
@@ -1076,7 +1077,7 @@ static int jtag3_open_dw(PROGRAMMER * pgm, char * port)
   if (strncmp(port, "usb", 3) == 0) {
 #if defined(HAVE_LIBUSB)
     serdev = &usb_serdev_frame;
-    baud = USB_DEVICE_JTAGICE3;
+/*    baud = USB_DEVICE_JTAGICE3; */ /* work around for multiple firmware versions. See usbdevs.h */
     pgm->fd.usb.max_xfer = USBDEV_MAX_XFER_3;
     pgm->fd.usb.rep = USBDEV_BULK_EP_READ_3;
     pgm->fd.usb.wep = USBDEV_BULK_EP_WRITE_3;
@@ -1088,7 +1089,8 @@ static int jtag3_open_dw(PROGRAMMER * pgm, char * port)
   }
 
   strcpy(pgm->port, port);
-  if (serial_open(port, baud, &pgm->fd)==-1) {
+  if (   serial_open(port, USB_DEVICE_JTAGICE3_2_x, &pgm->fd)==-1 
+      && serial_open(port, USB_DEVICE_JTAGICE3_3_8, &pgm->fd)==-1 ) {
     return -1;
   }
 
@@ -1118,7 +1120,7 @@ static int jtag3_open_pdi(PROGRAMMER * pgm, char * port)
   if (strncmp(port, "usb", 3) == 0) {
 #if defined(HAVE_LIBUSB)
     serdev = &usb_serdev_frame;
-    baud = USB_DEVICE_JTAGICE3;
+/*    baud = USB_DEVICE_JTAGICE3; */ /* work around for multiple firmware versions. See usbdevs.h */
     pgm->fd.usb.max_xfer = USBDEV_MAX_XFER_3;
     pgm->fd.usb.rep = USBDEV_BULK_EP_READ_3;
     pgm->fd.usb.wep = USBDEV_BULK_EP_WRITE_3;
@@ -1130,7 +1132,8 @@ static int jtag3_open_pdi(PROGRAMMER * pgm, char * port)
   }
 
   strcpy(pgm->port, port);
-  if (serial_open(port, baud, &pgm->fd)==-1) {
+  if (   serial_open(port, USB_DEVICE_JTAGICE3_2_x, &pgm->fd)==-1 
+      && serial_open(port, USB_DEVICE_JTAGICE3_3_8, &pgm->fd)==-1 ) {
     return -1;
   }
 

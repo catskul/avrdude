@@ -99,7 +99,7 @@ static int usbdev_open(char * port, long baud, union filedescriptor *fd)
 	  fprintf(stderr,
 		  "%s: usbdev_open(): invalid serial number \"%s\"\n",
 		  progname, serno);
-	  exit(1);
+	  return -1;
 	}
     }
 
@@ -137,7 +137,7 @@ static int usbdev_open(char * port, long baud, union filedescriptor *fd)
 		       * continue anyway.
 		       */
 		      if (serno != NULL)
-			exit(1); /* no chance */
+			return -1; /* no chance */
 		      else
 			strcpy(string, "[unknown]");
 		    }
@@ -267,7 +267,7 @@ static int usbdev_open(char * port, long baud, union filedescriptor *fd)
 
   fprintf(stderr, "%s: usbdev_open(): did not find any%s USB device \"%s\"\n",
 	  progname, serno? " (matching)": "", port);
-  exit(1);
+  return -1; 
 }
 
 static void usbdev_close(union filedescriptor *fd)

@@ -30,7 +30,8 @@
 #define USB_DEVICE_AVRISPMKII  0x2104
 #define USB_DEVICE_STK600      0x2106
 #define USB_DEVICE_AVRDRAGON   0x2107
-#define USB_DEVICE_JTAGICE3    0x2110
+#define USB_DEVICE_JTAGICE3_2_x  0x2110 /* Firmware 2.x JTAGICE3 shows different productId based on firmware */
+#define USB_DEVICE_JTAGICE3_3_8  0x2140 /* Firmware 3.8 */
 
 /* JTAGICEmkII, AVRISPmkII */
 #define USBDEV_BULK_EP_WRITE_MKII 0x02
