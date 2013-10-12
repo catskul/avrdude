@@ -183,6 +183,13 @@ static int usbdev_open(char * port, long baud, union filedescriptor *fd)
 		      goto trynext;
 		    }
 
+#ifdef LIBUSB_HAS_DETACH_KERNEL_DRIVER_NP
+		  if (usb_detach_kernel_driver_np(udev, 0) < 0 )
+		    {
+		       fprintf(stderr, "Warning: could not detach kernel driver: %s\n", usb_strerror());
+		    }                                                        
+#endif
+
 		  if (usb_set_configuration(udev, dev->config[0].bConfigurationValue))
 		    {
 		      fprintf(stderr,
